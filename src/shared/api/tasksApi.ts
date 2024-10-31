@@ -47,6 +47,10 @@ export const tasksApi = createApi({
       }),
       invalidatesTags: [{type: 'Tasks', id: 'LIST'}]
     }),
+    listTasks: builder.query<TasksResponse, string>({
+      query: (limit = "") => `tasks?${limit && `_limit=${limit}`}`,
+    }),
+
   }),
 });
 
@@ -55,4 +59,5 @@ export const {
   useAddTaskMutation,
   useUpdateTaskMutation,
   useDeleteTaskMutation,
+  useListTasksQuery
 } = tasksApi;

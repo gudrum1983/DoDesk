@@ -111,3 +111,9 @@ body {
     background-color: #f9f9f9;
   }
 }
+
+.box{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
