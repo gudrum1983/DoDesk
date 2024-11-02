@@ -19,10 +19,8 @@ export const tasksApi = createApi({
     }),
     addTask: builder.mutation<Task, CreateTask>({
       query: (newTask) => {
-
-        const {title, description} = newTask
         const id: string = uuidv4()
-        const taskWithId = {title, description, id};
+        const taskWithId = {...newTask, id};
 
         return {
           url: 'tasks',
@@ -47,10 +45,6 @@ export const tasksApi = createApi({
       }),
       invalidatesTags: [{type: 'Tasks', id: 'LIST'}]
     }),
-    listTasks: builder.query<TasksResponse, string>({
-      query: (limit = "") => `tasks?${limit && `_limit=${limit}`}`,
-    }),
-
   }),
 });
 
@@ -59,5 +53,4 @@ export const {
   useAddTaskMutation,
   useUpdateTaskMutation,
   useDeleteTaskMutation,
-  useListTasksQuery
 } = tasksApi;
