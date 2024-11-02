@@ -19,11 +19,10 @@ function Home() {
   return (
     <Page>
       <Header textButton="Создать задачу" url="create"/>
-      {isFullLoading && <h1>Загрузка....</h1>}
-      {data.length < 1 && <h1>Пустой список</h1>}
-
       <div className={styles.box}>
-        <List
+        { isFullLoading
+          ? <h1>Загрузка....</h1>
+          : <List
           className={styles.taskList}
           height={700}
           innerElementType="ol"
@@ -46,9 +45,9 @@ function Home() {
               </li>
             );
           }}
-        </List>
-      </div>
-    </Page>
+        </List>}
+          </div>
+          </Page>
 
   )
 }

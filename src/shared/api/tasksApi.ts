@@ -5,7 +5,7 @@ import {v4 as uuidv4} from 'uuid';
 export const tasksApi = createApi({
   reducerPath: 'tasksApi',
   tagTypes: ['Tasks'],
-  baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:3001/'}),
+  baseQuery: fetchBaseQuery({baseUrl: 'https://render-json-db-toso.onrender.com/'}),
   endpoints: (builder) => ({
     getTasks: builder.query<TasksResponse, string>({
       query: (urlParams) => urlParams ? `tasks?${urlParams}` : "tasks",

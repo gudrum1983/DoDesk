@@ -4,16 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"vite\" \"yarn server\"",
+    "dev": "vite",
     "server": "json-server -w db.json -p 3001",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview-dev": "concurrently \"vite preview\" \"yarn server\"",
     "preview": "vite preview",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d dist"
   },
-  "homepage": "https://gudrum1983.github.io/DoDesk/",
   "dependencies": {
     "@reduxjs/toolkit": "2.3.0",
     "cors": "^2.8.5",
