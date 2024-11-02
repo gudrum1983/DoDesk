@@ -34,22 +34,44 @@ body {
 }
 
 .infoTask {
-
+  padding: 0 5px;
   display: flex;
   flex-direction: row;
   text-align: left;
   align-items: center;
   gap: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
+  z-index: 2;
 }
 
-.new{
-  background-color: chartreuse;
-  border: 2px solid green;
+.taskCard.new::after {
+  content: 'NEW';
+  position: absolute;
+  top: 5px;
+  right: 0;
+  background-color: rgba(0, 128, 0, 0.6);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 100%;
+  text-transform: uppercase;
+  transform: rotate(45deg);
+  z-index: 1;
 }
 
-.highPriority{
-  border: 2px dashed red;
+.taskCard.highPriority::before {
+  content: '🔥';
+  position: absolute;
+  top: 10px;
+  left: 9px;
+  font-size: 26px;
+  z-index: 1;
 }
+
 
 .header{
   display: flex;
@@ -60,6 +82,18 @@ body {
 .text{
   padding: 0;
   margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bold{
+  padding: 0;
+  margin: 0;
+  font-weight: bold;
+  /*  overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;*/
 }
 
 .taskList{
@@ -77,9 +111,9 @@ body {
   // display: flex;
   // flex-direction: column;
    //gap: 20px;
-   //list-style: none;
-  // padding: 0;
- //  margin: 0;
+   list-style: none;
+   padding: 0;
+   margin: 0;
   }
 }
 
@@ -136,8 +170,19 @@ body {
 }
 
 .box{
+
   display: flex;
   flex-direction: row;
   gap: 10px;
   position: relative;
 }
+
+.buttonBox{
+  width: 100%;
+  max-width: 200px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  position: relative;
+}
+

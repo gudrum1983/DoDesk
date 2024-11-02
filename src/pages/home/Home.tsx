@@ -1,41 +1,26 @@
 import {
   useGetTasksQuery,
-  useDeleteTaskMutation,
 } from "../../shared/api/tasksApi.ts";
 import './styles.scss'
 import { FixedSizeList as List } from 'react-window';
+import {useNavigate} from "react-router-dom";
 
 function Home() {
 
-
+  const navigate = useNavigate();
   const {data = [], isLoading: isFullLoading} = useGetTasksQuery('');
 
-  const [deleteTask, {}] = useDeleteTaskMutation();
-
-
-
-  const handleShowTask = async (id: string) => {
+  const handleShowTask = async (id: string | undefined) => {
     if (id) {
       try {
-        //await deleteTask(id).unwrap();
-        window.alert("тук-тук")
+        navigate(`/${id}`);
       } catch (err) {
+        console.error('Navigation error:', err);
       }
-      console.error('error');
+    } else {
+      console.error('Invalid task ID');
     }
-  }
-
-
-
-  const handleDeleteTask = async (id: string) => {
-    if (id) {
-      try {
-        await deleteTask(id).unwrap();
-      } catch (err) {
-      }
-      console.error('error');
-    }
-  }
+  };
 
   return (
     <div className="appContainer">
@@ -52,6 +37,7 @@ function Home() {
       <div className="box">
 
         <List
+          className={"taskList"}
           height={700}
           innerElementType="ol"
           itemData={data}
@@ -62,20 +48,17 @@ function Home() {
           {({index, style }) => {
             return (
               <li key={data[index].id} style={style}
-                  className={`taskCard ${data[index].new ? "new" : ""} ${data[index].highPriority ? "highPriority" : ""}`}>
+                  className={`taskCard ${data[index].newStatus ? "new" : ""} ${data[index].highPriority ? "highPriority" : ""}`}>
                 <div className="infoTask">
-                  <h3 className="text">{index + 1}. {data[index].title}</h3>
-                  <p className="text">{data[index].description}</p>
+                  <p className="text"><span className={'bold'}>{index + 1}. {data[index].title} </span>
+                  {data[index].description}</p>
                 </div>
                 <div className="buttonBox">
                   <button onClick={() => {
                     handleShowTask(data[index].id)
                   }}>Посмотреть
                   </button>
-                  <button onClick={() => {
-                    handleDeleteTask(data[index].id)
-                  }}>delete
-                  </button>
+
                 </div>
               </li>
             );

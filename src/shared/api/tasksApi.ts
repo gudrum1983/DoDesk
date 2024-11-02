@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {CreateTask, Task, TasksResponse} from "../../entities/Task.ts";
+import {CreateTask, Task, TasksResponse, UpdateTask} from "../../entities/Task.ts";
 import {v4 as uuidv4} from 'uuid';
 
 export const tasksApi = createApi({
@@ -17,6 +17,9 @@ export const tasksApi = createApi({
           ]
           : [{type: 'Tasks', id: 'LIST'}],
     }),
+    getTask: builder.query<Task, string>({
+      query: (id) => `tasks/${id}`,
+    }),
     addTask: builder.mutation<Task, CreateTask>({
       query: (newTask) => {
         const id: string = uuidv4()
@@ -30,7 +33,7 @@ export const tasksApi = createApi({
       },
       invalidatesTags: [{type: 'Tasks', id: 'LIST'}]
     }),
-    updateTask: builder.mutation({
+    updateTask: builder.mutation<Task, { id: string } & UpdateTask>({
       query: ({id, ...updatedTask}) => ({
         url: `tasks/${id}`,
         method: 'PUT',
@@ -52,5 +55,6 @@ export const {
   useGetTasksQuery,
   useAddTaskMutation,
   useUpdateTaskMutation,
+  useGetTaskQuery,
   useDeleteTaskMutation,
 } = tasksApi;
