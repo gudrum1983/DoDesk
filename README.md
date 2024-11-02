@@ -1,59 +1,111 @@
-# React + TypeScript + Vite
+# Тестовое задание
+Перейдите по адресу [https://render-json-db-toso.onrender.com](https://render-json-db-toso.onrender.com), чтобы
+разбудить JSON Server. 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Порядок команд для запуска проекта
 
-Currently, two official plugins are available:
+1. **Клонируйте репозиторий:**
+   ```bash
+   git clone https://github.com/gudrum1983/DoDesk.git
+   ```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+2. **Перейдите в каталог проекта:**
+   ```bash
+   cd DoDesk
+   ```
 
-## Expanding the ESLint configuration
+3. **Установите зависимости:**
+   ```bash
+   yarn
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+4. **Перед запуском убедитесь, что сервер активен:**
+   Перейдите по адресу [https://render-json-db-toso.onrender.com](https://render-json-db-toso.onrender.com), чтобы
+   убедиться, что сервер JSON Server активен. Это необходимо, так как сервер работает на бесплатной основе и при
+   первичной загрузке может потребоваться время для его "пробуждения".
 
 
-Тестовое задание
+5. **Запустите проект для разработки:**
+   ```bash
+   yarn dev
+   ```
+   **После выполнения этой команды проект будет доступен по локальному
+   адресу [http://localhost:5173/](http://localhost:5173/).**
 
-Задание: Используя React, RTK Query, React Router DOM 6, SASS, Typescript и FSD-архитектуру сделайте простое приложение:
 
-Главная страница - список задач (бесконечный скролл + виртуализация)
-Каждая задача в списке - это строка: номер + заголовок + описание обрезанное "...", если не влезает + кнопка "просмотр"
-Кнопка "просмотр" ведет на отдельный роут, где отображается полная информация о задаче в произвольной форме + кнопка "назад"
+6. **Соберите проект для предпросмотра (если необходимо):**
+   ```bash
+   yarn build
+   ```
+
+7. **Перед запуском убедитесь, что сервер активен:**
+   Перейдите по адресу [https://render-json-db-toso.onrender.com](https://render-json-db-toso.onrender.com), чтобы
+   убедиться, что сервер JSON Server активен.
+
+
+8. **Запустите проект в режиме предпросмотра:**
+   ```bash
+   yarn preview
+   ```
+
+   **После выполнения этой команды проект будет доступен по локальному
+   адресу [http://localhost:4173/](http://localhost:4173/).**
+
+# Описание проекта
+
+## Задание
+
+Создать простое приложение, используя следующие технологии:
+
+- **React**
+- **RTK Query**
+- **React Router DOM 6**
+- **SASS**
+- **TypeScript**
+- **FSD (feature-sliced design) архитектура**
+
+### Требования к функционалу
+
+- **Главная страница**: список задач с поддержкой бесконечного скролла и виртуализации.
+- **Отображение задачи**: каждая задача представлена в виде строки с номером, заголовком и обрезанным описанием (если
+  оно не помещается), а также кнопкой "просмотр".
+- **Просмотр задачи**: кнопка "просмотр" должна перенаправлять на отдельный маршрут с полной информацией о задаче и
+  кнопкой "назад".
+
+## Реализованный функционал
+
+1. **Главная страница**:
+    - Отображается список задач с виртуализацией и бесконечным скроллом.
+    - Для каждой задачи отображаются:
+        - Номер
+        - Заголовок
+        - Обрезанное описание с `...`, если текст не помещается
+        - Новые и важные задачи помечены иконками
+        - Кнопка "просмотр", которая ведет на отдельную страницу с полной информацией о задаче
+    - Добавлена кнопка "Создать новую задачу", ведущая на страницу создания задачи.
+
+2. **Страница создания задачи**:
+    - Содержит форму с полями:
+        - Заголовок
+        - Описание
+        - Признак важности задачи
+    - Кнопка "Создать" для добавления новой задачи. После нажатия:
+        - Задача создается с автоматически установленным признаком "новая".
+        - Пользователь перенаправляется на главную страницу, в начало списка, а новая задача отображается в самом низу
+          списка (в планах — возврат к предыдущей позиции или переход в конец списка для фокуса на новой задаче).
+    - Кнопка "Назад" для возврата на главную страницу в начало списка.
+
+3. **Страница просмотра задачи**:
+    - Полная информация о задаче.
+    - Возможность редактирования и удаления задачи.
+    - При просмотре новой задачи признак "новая" снимается.
+
+# Планируемые улучшения
+
+- **Фокусировка при создании задачи**: при создании новой задачи планируется возвращать пользователя к предыдущей
+  позиции в списке или перемещать фокус на конец списка.
+- **UI-библиотека и обновление дизайна**: подключение UI-библиотеки для улучшения дизайна и стилизации приложения.
+- **Пагинация**: добавление загрузки данных с сервера частями для улучшения производительности.
+- **Добавление форм с использованием хука useForm**: планируется добавить формы для создания и редактирования задач с
+  использованием тега `<form>` и хука `useForm`.
+- **Роуты создания и просмотра в попапах**: планируется реализовать модальные окна для создания и просмотра задач.

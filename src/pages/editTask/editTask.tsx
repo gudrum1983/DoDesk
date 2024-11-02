@@ -14,7 +14,7 @@ export default function EditTask() {
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [isChecked, setIsChecked] = useState(false);
   const [updateTask] = useUpdateTaskMutation();
-
+  const [initialTask, setInitialTask] = useState({title: '', description: '',  highPriority: false});
 
   useEffect(() => {
     if (!idCurrentItem) {
@@ -34,6 +34,7 @@ export default function EditTask() {
       setIsChecked(highPriority);
       setNewTaskTitle(title);
       setNewTaskDescription(description);
+      setInitialTask({title, description, highPriority});
 
       if (newStatus) {
         try {
@@ -50,6 +51,14 @@ export default function EditTask() {
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
+  };
+
+  const isModified = () => {
+    return (
+      newTaskTitle !== initialTask?.title ||
+      newTaskDescription !== initialTask?.description ||
+      isChecked !== initialTask?.highPriority
+    );
   };
 
   const handleDeleteTask = async (id: string) => {
@@ -118,7 +127,7 @@ export default function EditTask() {
             </div>
             <div className={style.buttonPlace}>
 
-              <button className={style.button} onClick={handleUpdTask}>Изменить задачу</button>
+              <button className={style.button} onClick={handleUpdTask} disabled={!isModified()}>Изменить задачу</button>
               <button className={style.button} onClick={() => handleDeleteTask(task.id)}>Удалить</button>
             </div>
           </div>

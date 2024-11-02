@@ -57,7 +57,9 @@ export default function CreateTask() {
                    onChange={handleCheckboxChange}/>
             <label className={style.label} htmlFor="priorityToggle">Важная задача</label>
           </div>
-          <button className={style.button} onClick={handleAddTask}>Создать задачу</button>
+          <button className={style.button} onClick={handleAddTask}
+                  disabled={!newTaskTitle || !newTaskDescription}>Создать задачу
+          </button>
         </div>
       </div>
     </Page>
