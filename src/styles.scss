@@ -20,6 +20,11 @@ body {
   min-height: 100vh;
 }
 
+button {
+  &:hover {
+    cursor: pointer;
+  }
+}
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
