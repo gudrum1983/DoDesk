@@ -1,0 +1,86 @@
+.box{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  position: relative;
+}
+
+.taskCard {
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 25px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+
+  &.new {
+    &::after {
+      content: 'NEW';
+      position: absolute;
+      top: 5px;
+      right: 100px;
+      background-color: rgba(0, 128, 0, 0.6);
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 5px;
+      border-radius: 100%;
+      text-transform: uppercase;
+      transform: rotate(-45deg);
+      z-index: 1;
+    }
+  }
+
+  &.highPriority {
+    &::before {
+      content: '🔥';
+      position: absolute;
+      bottom: 0;
+      left: 2px;
+      font-size: 26px;
+      z-index: 1;
+    }
+  }
+}
+
+
+.infoTask {
+  padding: 0 5px;
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
+  z-index: 2;
+}
+
+.text{
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bold{
+  padding: 0;
+  margin: 0;
+  font-weight: bold;
+}
+
+.taskList{
+  ol {
+   list-style: none;
+   padding: 0;
+   margin: 0;
+  }
+}

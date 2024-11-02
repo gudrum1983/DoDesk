@@ -195,6 +195,13 @@
       "description": "Аккуратно помыть питомца",
       "highPriority": false,
       "newStatus": false
+    },
+    {
+      "highPriority": true,
+      "description": "описание",
+      "title": "задача",
+      "newStatus": false,
+      "id": "74cffd84-3707-4017-800f-a81371af926a"
     }
   ]
 }

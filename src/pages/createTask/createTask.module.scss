@@ -1,0 +1,39 @@
+.createTaskContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background-color: bisque;
+  border: 1px solid black;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+.titleInput {
+  height: 20px;
+}
+
+.descriptionInput {
+  resize: none;
+}
+
+.buttonBox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+
+  .priorityToggle {
+    display: flex;
+    align-items: center;
+
+    .label {
+      cursor: pointer;
+    }
+  }
+
+  .button {
+    height: 30px;
+    cursor: pointer;
+  }
+}

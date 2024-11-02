@@ -1,6 +1,10 @@
-import { useEffect, useState } from "react";
-import { useDeleteTaskMutation, useGetTaskQuery, useUpdateTaskMutation } from "../../shared/api/tasksApi.ts";
-import { useNavigate, useParams } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useDeleteTaskMutation, useGetTaskQuery, useUpdateTaskMutation} from "../../shared/api/tasksApi.ts";
+import {useNavigate, useParams} from "react-router-dom";
+import Page from "../../shared/ui/page/page.tsx";
+import Header from "../../shared/ui/header/header.tsx";
+import style from './editTask.module.scss'
+
 
 export default function EditTask() {
   const params = useParams();
@@ -12,17 +16,15 @@ export default function EditTask() {
   const [updateTask] = useUpdateTaskMutation();
 
 
-
   useEffect(() => {
     if (!idCurrentItem) {
       navigate(`/`);
     }
   }, [idCurrentItem, navigate]);
 
-  const { data: task } = useGetTaskQuery(idCurrentItem!, {
+  const {data: task} = useGetTaskQuery(idCurrentItem!, {
     refetchOnMountOrArgChange: true,
   });
-
 
 
   useEffect(() => {
@@ -34,14 +36,12 @@ export default function EditTask() {
       setNewTaskDescription(description);
 
       if (newStatus) {
-        try{
-          updateTask({ id , highPriority, description, title, newStatus: false}).unwrap()
-        } catch(err) {
+        try {
+          updateTask({id, highPriority, description, title, newStatus: false}).unwrap()
+        } catch (err) {
           console.error("Failed to update task:", err);
         }
       }
-
-
     }
   }, [task]);
 
@@ -66,7 +66,13 @@ export default function EditTask() {
   const handleUpdTask = async () => {
     if (newTaskTitle && newTaskDescription && task) {
       try {
-        await updTask({id: task.id,  title: newTaskTitle, description: newTaskDescription, newStatus: false, highPriority: isChecked }).unwrap();
+        await updTask({
+          id: task.id,
+          title: newTaskTitle,
+          description: newTaskDescription,
+          newStatus: false,
+          highPriority: isChecked
+        }).unwrap();
         setNewTaskTitle('');
         setNewTaskDescription('');
         setIsChecked(false);
@@ -78,21 +84,12 @@ export default function EditTask() {
   };
 
   return (
-    <div className="createTaskContainer">
-      <a href={`/`}>Вернуться</a>
+    <Page>
+      <Header textButton="На гравную" url=""/>
+
+
       {task && (
-        <div>
-          <button onClick={() => handleDeleteTask(task.id)}>delete</button>
-          <div>
-            <input
-              type="checkbox"
-              id="priorityToggle"
-              name="highPriority"
-              checked={isChecked}
-              onChange={handleCheckboxChange}
-            />
-            <label htmlFor="priorityToggle">Важная задача</label>
-          </div>
+        <div className={style.createTaskContainer}>
           <input
             className="titleInput"
             placeholder="Введите заголовок"
@@ -110,9 +107,25 @@ export default function EditTask() {
             onChange={(e) => setNewTaskDescription(e.target.value)}
             value={newTaskDescription}
           />
+
+
+          <div className={style.buttonBox}>
+            <div className={style.priorityToggle}>
+              <input type="checkbox" id="priorityToggle" name="highPriority" checked={isChecked}
+                     onChange={handleCheckboxChange}/>
+              <label className={style.label} htmlFor="priorityToggle">Важная задача</label>
+
+            </div>
+            <div className={style.buttonPlace}>
+
+              <button className={style.button} onClick={handleUpdTask}>Изменить задачу</button>
+              <button className={style.button} onClick={() => handleDeleteTask(task.id)}>Удалить</button>
+            </div>
+          </div>
         </div>
+
+
       )}
-      <button onClick={handleUpdTask}>Изменить задачу</button>
-    </div>
+    </Page>
   );
 }

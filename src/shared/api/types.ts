@@ -1,4 +1,4 @@
-export interface Task {
+export interface Types {
     id: string;
     title: string;
     description: string;
@@ -6,10 +6,8 @@ export interface Task {
     newStatus: boolean;
 }
 
-export type CreateTask = Omit<Task, 'id' >;
+export type CreateTask = Omit<Types, 'id' >;
 
 export type UpdateTask = Partial<CreateTask>;
 
-
-
-export type TasksResponse = Task[];
+export type TasksResponse = Types[];
