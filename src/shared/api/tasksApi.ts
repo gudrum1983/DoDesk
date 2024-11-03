@@ -2,10 +2,14 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {CreateTask, Types, TasksResponse, UpdateTask} from "./types.ts";
 import {v4 as uuidv4} from 'uuid';
 
+const defaultBaseUrl = 'https://render-json-db-toso.onrender.com/';
+const baseUrl = import.meta.env.VITE_SERVER_BASE_URL || defaultBaseUrl;
+
+
 export const tasksApi = createApi({
   reducerPath: 'tasksApi',
   tagTypes: ['Tasks'],
-  baseQuery: fetchBaseQuery({baseUrl: 'https://render-json-db-toso.onrender.com/'}),
+  baseQuery: fetchBaseQuery({baseUrl: baseUrl}),
   endpoints: (builder) => ({
     getTasks: builder.query<TasksResponse, string>({
       query: (urlParams) => urlParams ? `tasks?${urlParams}` : "tasks",
