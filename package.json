@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev:local": "concurrently \"vite --mode development\" \"yarn server\"",
+    "dev": "concurrently \"vite --mode development\" \"yarn server\"",
     "dev:web": "vite --mode web",
     "server": "json-server -w db.json -p 3001",
     "build": "tsc -b && vite build",
