@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://gudrum1983.github.io/DoDesk",
   "scripts": {
     "dev": "concurrently \"vite --mode development\" \"yarn server\"",
     "dev:web": "vite --mode web",
