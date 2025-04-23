@@ -14,7 +14,7 @@
     "preview:local": "yarn build:local && concurrently \"vite preview --mode development\" \"yarn server\"",
     "preview:web": "yarn build:web && vite preview",
     "lint": "eslint .",
-    "predeploy": "yarn build",
+    "predeploy": "yarn build:web",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
