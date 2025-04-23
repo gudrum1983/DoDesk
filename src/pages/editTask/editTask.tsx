@@ -5,7 +5,7 @@ import Page from "../../shared/ui/page/page.tsx";
 import Header from "../../shared/ui/header/header.tsx";
 import style from './editTask.module.scss'
 
-
+const baseUrl: string = import.meta.env.BASE_URL || '/';
 export default function EditTask() {
   const params = useParams();
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export default function EditTask() {
 
   useEffect(() => {
     if (!idCurrentItem) {
-      navigate(`/`);
+      navigate(baseUrl);
     }
   }, [idCurrentItem, navigate]);
 
@@ -65,7 +65,7 @@ export default function EditTask() {
     if (id) {
       try {
         await deleteTask(id).unwrap();
-        navigate('/');
+        navigate(baseUrl);
       } catch (err) {
         console.error('error');
       }
@@ -85,7 +85,7 @@ export default function EditTask() {
         setNewTaskTitle('');
         setNewTaskDescription('');
         setIsChecked(false);
-        navigate('/');
+        navigate(baseUrl);
       } catch (err) {
         console.error('error');
       }
@@ -94,7 +94,7 @@ export default function EditTask() {
 
   return (
     <Page>
-      <Header textButton="На гравную" url=""/>
+      <Header textButton="На главную" url={baseUrl}/>
 
 
       {task && (

@@ -4,7 +4,8 @@ import CreateTask from "../pages/createTask/createTask.tsx";
 import EditTask from "../pages/editTask/editTask.tsx";
 import styles from "./app.module.scss";
 
-const baseUrl = process.env.VITE_BASE_URL || '/';
+const baseUrl = import.meta.env.BASE_URL || '/';
+
 
 console.log("baseUrl", baseUrl);
 

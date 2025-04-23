@@ -10,8 +10,7 @@ import Header from "../../shared/ui/header/header.tsx";
 const server: string = import.meta.env.VITE_SERVER || 'web';
 const textLoader: string = (server === 'web') ? 'JSON Server на \'https://render-json-db-toso.onrender.com/\' работает не быстро... 🕙 ожидайте... ' : '🕙 Загрузка....'
 
-console.log(textLoader)
-console.log(server)
+const baseUrl: string = import.meta.env.BASE_URL || '/';
 
 function Home() {
 
@@ -19,12 +18,12 @@ function Home() {
   const {data = [], isLoading: isFullLoading} = useGetTasksQuery('');
 
   const handleShowTask = (id: string | undefined) => {
-    if (id) navigate(`/${id}`);
+    if (id) navigate(`${baseUrl}${id}`);
   };
 
   return (
     <Page>
-      <Header textButton="Создать задачу" url="create"/>
+      <Header textButton="Создать задачу" url={`${baseUrl}create`}/>
       <div className={styles.box}>
         {isFullLoading
           ? <h1>{textLoader}</h1>
@@ -55,7 +54,6 @@ function Home() {
           </List>}
       </div>
     </Page>
-
   )
 }
 
